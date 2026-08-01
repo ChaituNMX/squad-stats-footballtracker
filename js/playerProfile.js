@@ -235,7 +235,7 @@ export function renderPlayerStats(){
 
   let dirty = false;
   state.data.players.forEach(p => {
-    if(ensurePlayerRatings(p, stats[p.id], true)) dirty = true;
+    if(ensurePlayerRatings(p, stats[p.id], false)) dirty = true;
   });
   if(dirty){
     state.data.players.forEach(p => {

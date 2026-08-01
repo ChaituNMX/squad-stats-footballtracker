@@ -1,9 +1,12 @@
 /* ---------- Points ---------- */
 export const POINTS = {
   GOAL: 2,
-  ASSIST: 1,
+  ASSIST: 2,
   MVP: 3,
-  WIN: 4
+  WIN: 4,
+  BEST_DEFENDER_1ST: 4,
+  BEST_DEFENDER_2ND: 3,
+  CLEAN_SHEET: 3
 };
 
 /* ---------- Hardcoded player photos ----------
@@ -17,6 +20,7 @@ export const PLAYER_PHOTOS = {};
 
 /* ---------- Player profiles & FPL-style card ratings ---------- */
 export const RATING_BASE = 60;
+export const DEFENDING_BASE = 70;
 
 export const POSITION_META = {
   GK:  { label: 'GK',  full: 'Goalkeeper', color: 'var(--amber)' },

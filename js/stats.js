@@ -4,7 +4,7 @@ import { POINTS } from './constants.js';
 
 export function computePlayerStats(){
   const stats = {};
-  state.data.players.forEach(p => { stats[p.id] = { id: p.id, name: p.name, goals: 0, assists: 0, matches: 0, mvps: 0, wins: 0, points: 0 }; });
+  state.data.players.forEach(p => { stats[p.id] = { id: p.id, name: p.name, goals: 0, assists: 0, matches: 0, mvps: 0, wins: 0, points: 0, defPoints: 0 }; });
 
   state.data.matches.forEach(m => {
     [...m.teamA.players, ...m.teamB.players].forEach(pid => {
@@ -27,6 +27,23 @@ export function computePlayerStats(){
         if(!stats[pid]) return;
         stats[pid].wins++;
         stats[pid].points += POINTS.WIN;
+      });
+    }
+
+    // Clean sheet bonus: if team concedes 5 or less goals, all players get 3 defPoints (not in leaderboard)
+    // Team A concedes what Team B scores, Team B concedes what Team A scores
+    if(m.scoreB <= 5){
+      m.teamA.players.forEach(pid => {
+        if(stats[pid]){
+          stats[pid].defPoints += 3;
+        }
+      });
+    }
+    if(m.scoreA <= 5){
+      m.teamB.players.forEach(pid => {
+        if(stats[pid]){
+          stats[pid].defPoints += 3;
+        }
       });
     }
   });
